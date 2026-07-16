@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Sparkles, ArrowRight, Menu, X, ArrowUpRight, MessageCircle, RefreshCw, Send, CheckCircle2, Play, Target, Crown, Sliders, Cpu } from 'lucide-react';
+import { Sparkles, ArrowRight, Menu, X, ArrowUpRight, MessageCircle, RefreshCw, Send, CheckCircle2, Play, Target, Crown, Sliders, Cpu, GraduationCap, BookOpen, Lightbulb } from 'lucide-react';
 import rightSectionImg from './public/image.png';
 
 interface ConfettiPiece {
@@ -167,6 +167,40 @@ export default function App() {
     }
   ];
 
+  // Testimonials State & Data
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+
+  const testimonials = [
+    {
+      quote: "I really enjoyed working with the Hatch team, their process is clear and easy to understand. Diligent, competent with good ideas, they are keen to do excellent work. Passionate about making the interface look good and also usable.",
+      author: "Ralph Edwards",
+      role: "CEO & Founder Opensight",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=400&q=80", // High contrast portrait
+      blobColor: "#ff99cc"
+    },
+    {
+      quote: "Selling our premium course online was a struggle until we partnered with Hatch. Their brand systems and high-converting funnel design changed everything. We generated over 105 high-intent leads in the first month!",
+      author: "Dr. Aris Thorne",
+      role: "Founder, PhD Solutions",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&h=400&q=80",
+      blobColor: "#7bbbff"
+    },
+    {
+      quote: "Hatch's AI workflows saved us 20+ manual hours a week. Leads flow smoothly from our social feeds straight into our CRM. If it's repetitive, they automate it perfectly. Invaluable partner for EdTech brands.",
+      author: "Sarah Jenkins",
+      role: "Admissions Director, FMGE Boosters",
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&h=400&q=80",
+      blobColor: "#99ffcc"
+    },
+    {
+      quote: "The brand systems Hatch designed for us are incredible. It feels playful, premium, and unique—far away from standard corporate templates. True masters of Neo-Brutalist and zine aesthetics.",
+      author: "Dianne Russell",
+      role: "Creative Lead LearnCraft",
+      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400&q=80",
+      blobColor: "#ffcc99"
+    }
+  ];
+
   // Platform diagram hover state
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [hubVisible, setHubVisible] = useState(false);
@@ -182,12 +216,12 @@ export default function App() {
   }, []);
 
   const nodeStats: Record<string, { name: string; stat: string; color: string }> = {
-    instagram: { name: 'Instagram Funnel', stat: '4.2x engagement rate via automated DM triggers.', color: '#ff99cc' },
-    youtube: { name: 'YouTube Integration', stat: '+28% watch time by auto-injecting dynamic course visual blocks.', color: '#7bbbff' },
-    tiktok: { name: 'TikTok Micro-Hooks', stat: '140,000+ views on average per programmatic script.', color: '#ffcc99' },
-    twitter: { name: 'Twitter/X Virality', stat: 'Auto-scheduling thought-leadership threads from course briefs.', color: '#ff99cc' },
-    linkedin: { name: 'LinkedIn Enterprise', stat: '42 inbound leads from high-ticket decision makers per week.', color: '#7bbbff' },
-    facebook: { name: 'Facebook Community', stat: 'Automated private group moderation & welcoming funnels.', color: '#ffcc99' }
+    founder: { name: 'Founder Brand (LinkedIn & IG)', stat: 'Generates organic trust & thought-leadership. Feeds high-intent traffic directly to the Hub.', color: '#7bbbff' },
+    ads: { name: 'Paid Ad Funnels (Meta & Google)', stat: 'Launches target-matched acquisition engines. Pours qualified scale prospects into the Hub.', color: '#ffcc99' },
+    cold: { name: 'Cold Outbound (Email & DM)', stat: 'Deploys hyper-personalized outreach sequences. Funnels enterprise B2B prospects to the Hub.', color: '#ff99cc' },
+    ai_scoring: { name: 'AI Lead Scoring', stat: 'Parses incoming leads and scores fit criteria using AI. Flags premium prospects in 12 seconds.', color: '#99ffcc' },
+    lms_nurture: { name: 'LMS Nurturing', stat: 'Triggers interactive mini-courses and email flows. Builds student affinity automatically.', color: '#7bbbff' },
+    booked_calls: { name: 'Booked Revenue Calls', stat: 'Drives scheduled meetings directly onto your admissions calendar. Keeps pipeline full of qualified buyers.', color: '#ffcc99' }
   };
 
   // AI Strategy Mock Builder State
@@ -402,8 +436,8 @@ export default function App() {
         <nav className="hidden md:flex items-center gap-8">
           <a href="#work" className="text-sm font-bold text-black hover:underline underline-offset-4 decoration-[#dddfe2]">Our Work</a>
           <a href="#services" className="text-sm font-bold text-black hover:underline underline-offset-4 decoration-[#dddfe2]">Capabilities</a>
-          <a href="#pipeline" className="text-sm font-bold text-black hover:underline underline-offset-4 decoration-[#dddfe2]">Pipeline</a>
           <a href="#playground" className="text-sm font-bold text-black hover:underline underline-offset-4 decoration-[#dddfe2]">Interactive Sandbox</a>
+          <a href="#testimonials" className="text-sm font-bold text-black hover:underline underline-offset-4 decoration-[#dddfe2]">Testimonials</a>
           <a href="#booking" className="text-sm font-bold text-black hover:underline underline-offset-4 decoration-[#dddfe2]">Contact</a>
         </nav>
 
@@ -433,8 +467,8 @@ export default function App() {
         <div className="md:hidden fixed inset-0 top-[84px] bg-[#f5f4f0] z-40 border-t border-black px-6 py-8 flex flex-col gap-6">
           <a href="#work" onClick={() => setMenuOpen(false)} className="font-serif text-3xl font-bold">Our Work</a>
           <a href="#services" onClick={() => setMenuOpen(false)} className="font-serif text-3xl font-bold">Capabilities</a>
-          <a href="#pipeline" onClick={() => setMenuOpen(false)} className="font-serif text-3xl font-bold">Pipeline</a>
           <a href="#playground" onClick={() => setMenuOpen(false)} className="font-serif text-3xl font-bold">Interactive Sandbox</a>
+          <a href="#testimonials" onClick={() => setMenuOpen(false)} className="font-serif text-3xl font-bold">Testimonials</a>
           <a href="#booking" onClick={() => setMenuOpen(false)} className="font-serif text-3xl font-bold">Contact</a>
           <a 
             href="#booking" 
@@ -515,9 +549,24 @@ export default function App() {
                 </a>
 
                 {/* Navy Hand-drawn SVG Arrow */}
-                <svg className="w-16 h-8 text-[#160042] hidden xl:block transform rotate-12 transition-transform duration-300 group-hover:animate-arrow-bounce origin-right" fill="none" viewBox="0 0 100 40">
-                  <path d="M90 20 C60 10, 40 30, 15 15" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-                  <path d="M25 8 L15 15 L23 25" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                <svg className="w-20 h-12 text-[#160042] hidden xl:block transform rotate-6 transition-transform duration-300 origin-right drawing-arrow" fill="none" viewBox="0 0 100 60">
+                  {/* The loopy tail path */}
+                  <path 
+                    d="M 80 12 C 85 22, 70 45, 55 40 C 42 35, 45 18, 55 20 C 65 22, 60 42, 40 45 C 28 47, 18 42, 12 38" 
+                    stroke="currentColor" 
+                    strokeWidth="3.2" 
+                    strokeLinecap="round"
+                    className="arrow-path-tail"
+                  />
+                  {/* The arrowhead path */}
+                  <path 
+                    d="M 22 28 L 12 38 L 22 48" 
+                    stroke="currentColor" 
+                    strokeWidth="3.2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                    className="arrow-path-head"
+                  />
                 </svg>
               </div>
             </div>
@@ -526,6 +575,50 @@ export default function App() {
 
           {/* Right Column: User-provided right section PNG (Scaled up to fill layout) */}
           <div className="lg:col-span-5 flex items-center justify-center relative select-none">
+            
+            {/* Floating Graduation Cap Sticker (Top-Left) */}
+            <div className="absolute -top-8 -left-8 z-20 animate-float hidden xl:block">
+              <div className="bg-[#ff99cc] border-2 border-black p-2.5 shadow-[3px_3px_0px_#000000] rotate-[-12deg] hover:rotate-0 transition-all duration-200 flex items-center justify-center w-14 h-14 rounded-2xl">
+                <GraduationCap className="w-7 h-7 text-[#160042]" />
+              </div>
+            </div>
+
+            {/* Floating Lightbulb Sticker (Top-Right) */}
+            <div className="absolute -top-10 -right-4 z-20 animate-float-delayed hidden xl:block">
+              <div className="bg-[#99ffcc] border-2 border-black p-2.5 shadow-[3px_3px_0px_#000000] rotate-[15deg] hover:rotate-0 transition-all duration-200 flex items-center justify-center w-14 h-14 rounded-2xl">
+                <Lightbulb className="w-7 h-7 text-[#160042]" />
+              </div>
+            </div>
+
+            {/* Floating Book Sticker (Right-Middle) */}
+            <div className="absolute top-[40%] -right-12 z-20 animate-float hidden xl:block">
+              <div className="bg-[#7bbbff] border-2 border-black p-2.5 shadow-[3px_3px_0px_#000000] rotate-[-8deg] hover:rotate-0 transition-all duration-200 flex items-center justify-center w-14 h-14 rounded-full">
+                <BookOpen className="w-7 h-7 text-[#160042]" />
+              </div>
+            </div>
+
+            {/* Animated Growth Graph Squiggle (Bottom-Right) */}
+            <div className="absolute -bottom-10 -right-10 text-[#ffcc99] animate-float-delayed hidden xl:block -z-10">
+              <svg className="w-20 h-20" viewBox="0 0 100 100" fill="none">
+                {/* Dashed growth trend curve */}
+                <path 
+                  d="M 10 90 Q 30 70, 45 45 T 85 15" 
+                  stroke="currentColor" 
+                  strokeWidth="3.5" 
+                  strokeDasharray="6 4" 
+                  strokeLinecap="round" 
+                />
+                {/* Growth Arrowhead */}
+                <path 
+                  d="M 72 15 L 85 15 L 85 28" 
+                  stroke="currentColor" 
+                  strokeWidth="3.5" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                />
+              </svg>
+            </div>
+
             <div className="relative bg-white border-[3px] border-black p-4 shadow-[8px_8px_0px_#000000] rotate-[1.5deg] hover:rotate-0 transition-transform duration-300">
               <img 
                 src={rightSectionImg} 
@@ -672,15 +765,15 @@ export default function App() {
         <section id="pipeline" className="scroll-mt-12 flex flex-col items-center justify-center gap-6" ref={hubRef}>
           <div className={`text-center transition-all duration-700 ${hubVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <span className="text-[11px] font-bold tracking-[3px] uppercase text-slate-500">SYSTEM ARCHITECTURE</span>
-            <h3 className="font-serif text-2xl md:text-3xl mt-1">Our Platform Distribution Ecosystem</h3>
-            <p className="text-xs text-slate-500 mt-2">Hover over the platform nodes to trace the active growth funnel in real time.</p>
+            <h3 className="font-serif text-2xl md:text-3xl mt-1">Our Student Acquisition Scale Engine</h3>
+            <p className="text-xs text-slate-500 mt-2">Hover over the pipeline nodes to trace the active student & lead acquisition flows in real time.</p>
           </div>
           
           <div className={`bg-white border-2 border-black rounded-[16px] p-6 sm:p-10 max-w-4xl w-full select-none flex flex-col gap-6 transition-all duration-700 delay-150 ${hubVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             
             {/* Dynamic Status Bar */}
             <div className="bg-[#f5f4f0] border border-black p-4 rounded-xl min-h-[72px] overflow-hidden relative">
-              {hoveredNode ? (
+              {hoveredNode && nodeStats[hoveredNode] ? (
                 <div className="flex items-center gap-3 animate-status-slide-in">
                   <div
                     className="w-4 h-4 rounded-full border-2 border-black animate-pulse shrink-0"
@@ -695,13 +788,13 @@ export default function App() {
                     <div className="h-1.5 rounded-full bg-black/10 w-28 overflow-hidden">
                       <div className="h-full rounded-full transition-all duration-700" style={{ width: '80%', backgroundColor: nodeStats[hoveredNode].color }} />
                     </div>
-                    <span className="text-[9px] font-mono text-slate-400">CHANNEL ACTIVITY</span>
+                    <span className="text-[9px] font-mono text-slate-400">PIPELINE ACTIVITY</span>
                   </div>
                 </div>
               ) : (
                 <div className="flex items-center gap-2 h-full">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-                  <span className="text-xs text-slate-400 italic">Hover any platform node to trace its live pipeline metrics...</span>
+                  <span className="text-xs text-slate-400 italic">Hover any pipeline node to trace active student & lead acquisition flows...</span>
                 </div>
               )}
             </div>
@@ -712,12 +805,12 @@ export default function App() {
 
                 {/* ── BACKGROUND PATHS (drawn on section enter) ── */}
                 {[
-                  { d: 'M150 60 L400 160', nodeKey: 'instagram', color: '#ff99cc' },
-                  { d: 'M150 160 L400 160', nodeKey: 'youtube', color: '#7bbbff' },
-                  { d: 'M150 260 L400 160', nodeKey: 'tiktok', color: '#ffcc99' },
-                  { d: 'M650 60 L400 160', nodeKey: 'twitter', color: '#ff99cc' },
-                  { d: 'M650 160 L400 160', nodeKey: 'linkedin', color: '#7bbbff' },
-                  { d: 'M650 260 L400 160', nodeKey: 'facebook', color: '#ffcc99' },
+                  { d: 'M150 60 L400 160', nodeKey: 'founder', color: '#7bbbff' },
+                  { d: 'M150 160 L400 160', nodeKey: 'ads', color: '#ffcc99' },
+                  { d: 'M150 260 L400 160', nodeKey: 'cold', color: '#ff99cc' },
+                  { d: 'M400 160 L650 60', nodeKey: 'ai_scoring', color: '#99ffcc' },
+                  { d: 'M400 160 L650 160', nodeKey: 'lms_nurture', color: '#7bbbff' },
+                  { d: 'M400 160 L650 260', nodeKey: 'booked_calls', color: '#ffcc99' },
                 ].map(({ d, nodeKey, color }, i) => (
                   <g key={nodeKey}>
                     {/* Base track */}
@@ -735,25 +828,58 @@ export default function App() {
                       strokeLinecap="round"
                       strokeDasharray="400"
                       strokeDashoffset={hubVisible ? '0' : '400'}
+                      className={hoveredNode === nodeKey ? 'animate-dash-flow' : ''}
                       style={{
                         transition: `stroke-dashoffset 0.8s cubic-bezier(0.4,0,0.2,1) ${0.3 + i * 0.1}s`,
                         opacity: hoveredNode === nodeKey ? 1 : 0.25,
                       }}
                     />
-                    {/* Animated traveling dot */}
-                    {hoveredNode === nodeKey && (
-                      <circle r="5" fill={color} stroke="#000" strokeWidth="1.5">
-                        <animateMotion dur="1.2s" repeatCount="indefinite" rotate="auto">
-                          <mpath href={`#path-${nodeKey}`} />
-                        </animateMotion>
-                      </circle>
-                    )}
                     {/* Hidden path for animateMotion */}
                     <path id={`path-${nodeKey}`} d={d} fill="none" stroke="none" />
                   </g>
                 ))}
 
-                {/* ── CENTRAL NODE — Glowing pulsing mint hub ── */}
+                {/* ── CONTINUOUS FLOWING LEAD PARTICLES ── */}
+                {hubVisible && [
+                  { nodeKey: 'founder', color: '#7bbbff' },
+                  { nodeKey: 'ads', color: '#ffcc99' },
+                  { nodeKey: 'cold', color: '#ff99cc' },
+                  { nodeKey: 'ai_scoring', color: '#99ffcc' },
+                  { nodeKey: 'lms_nurture', color: '#7bbbff' },
+                  { nodeKey: 'booked_calls', color: '#ffcc99' },
+                ].map(({ nodeKey, color }) => {
+                  const isCurrentHovered = hoveredNode === nodeKey;
+                  return (
+                    <g key={`flow-${nodeKey}`} style={{ opacity: hoveredNode && !isCurrentHovered ? 0.35 : 1, transition: 'opacity 0.25s ease' }}>
+                      {/* Dot 1 */}
+                      <circle 
+                        r={isCurrentHovered ? 6 : 3.5} 
+                        fill={color} 
+                        stroke="#000000" 
+                        strokeWidth={isCurrentHovered ? 1.8 : 1}
+                        style={{ transition: 'r 0.2s ease, stroke-width 0.2s ease' }}
+                      >
+                        <animateMotion dur="2.2s" repeatCount="indefinite" rotate="auto" begin="0s">
+                          <mpath href={`#path-${nodeKey}`} />
+                        </animateMotion>
+                      </circle>
+                      {/* Dot 2 */}
+                      <circle 
+                        r={isCurrentHovered ? 6 : 3.5} 
+                        fill={color} 
+                        stroke="#000000" 
+                        strokeWidth={isCurrentHovered ? 1.8 : 1}
+                        style={{ transition: 'r 0.2s ease, stroke-width 0.2s ease' }}
+                      >
+                        <animateMotion dur="2.2s" repeatCount="indefinite" rotate="auto" begin="1.1s">
+                          <mpath href={`#path-${nodeKey}`} />
+                        </animateMotion>
+                      </circle>
+                    </g>
+                  );
+                })}
+
+                {/* ── CENTRAL NODE — Pulsing mint hub ── */}
                 <g className={`transition-all duration-500 ${hubVisible ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '0.9s' }}>
                   {/* Outer expansion ring 1 */}
                   <circle cx="400" cy="160" r="56" fill="none" stroke="#99ffcc" strokeWidth="1.5" opacity="0.5">
@@ -769,24 +895,36 @@ export default function App() {
                   <circle cx="400" cy="160" r="44" fill="#99ffcc" stroke="#000000" strokeWidth="3">
                     <animate attributeName="r" values="44;46;44" dur="2s" repeatCount="indefinite" />
                   </circle>
-                  {/* Play icon */}
-                  <polygon points="392,144 392,176 424,160" fill="#000000" />
+                  {/* Rotating Cog icon centered inside central node */}
+                  <foreignObject width="50" height="50" x="375" y="135" className="pointer-events-none">
+                    <div className="w-full h-full flex items-center justify-center">
+                      <Cpu className="w-8 h-8 text-black animate-spin" style={{ animationDuration: '8s' }} />
+                    </div>
+                  </foreignObject>
                 </g>
 
-                {/* ── LEFT NODES (staggered entrance) ── */}
+                {/* ── LEFT NODES ── */}
                 {[
-                  { cx: 150, cy: 60, nodeKey: 'instagram', color: '#ff99cc', delay: 0.2, icon: (
-                    <>
-                      <rect x="140" y="50" width="20" height="20" rx="5" stroke="#000" strokeWidth="2" fill="none" />
-                      <circle cx="150" cy="60" r="4.5" stroke="#000" strokeWidth="2" />
-                      <circle cx="158" cy="52" r="1.5" fill="#000" />
-                    </>
+                  { cx: 150, cy: 60, nodeKey: 'founder', color: '#7bbbff', delay: 0.2, icon: (
+                    <foreignObject width="40" height="40" x="130" y="40" className="pointer-events-none">
+                      <div className="w-full h-full flex items-center justify-center">
+                        <Crown className="w-5 h-5 text-black" />
+                      </div>
+                    </foreignObject>
                   )},
-                  { cx: 150, cy: 160, nodeKey: 'youtube', color: '#7bbbff', delay: 0.35, icon: (
-                    <polygon points="144,152 144,168 160,160" fill="#000" />
+                  { cx: 150, cy: 160, nodeKey: 'ads', color: '#ffcc99', delay: 0.35, icon: (
+                    <foreignObject width="40" height="40" x="130" y="140" className="pointer-events-none">
+                      <div className="w-full h-full flex items-center justify-center">
+                        <Target className="w-5 h-5 text-black" />
+                      </div>
+                    </foreignObject>
                   )},
-                  { cx: 150, cy: 260, nodeKey: 'tiktok', color: '#ffcc99', delay: 0.5, icon: (
-                    <path d="M146 254H154V264C154 267 151 269 148 269C145 269 143 267 143 264C143 261 145 259 148 259" stroke="#000" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                  { cx: 150, cy: 260, nodeKey: 'cold', color: '#ff99cc', delay: 0.5, icon: (
+                    <foreignObject width="40" height="40" x="130" y="240" className="pointer-events-none">
+                      <div className="w-full h-full flex items-center justify-center">
+                        <Send className="w-5 h-5 text-black" />
+                      </div>
+                    </foreignObject>
                   )},
                 ].map(({ cx, cy, nodeKey, color, delay, icon }) => (
                   <g
@@ -828,14 +966,26 @@ export default function App() {
 
                 {/* ── RIGHT NODES ── */}
                 {[
-                  { cx: 650, cy: 60, nodeKey: 'twitter', color: '#ff99cc', delay: 0.25, icon: (
-                    <path d="M642 52L658 68M658 52L642 68" stroke="#000" strokeWidth="2.5" strokeLinecap="round" />
+                  { cx: 650, cy: 60, nodeKey: 'ai_scoring', color: '#99ffcc', delay: 0.25, icon: (
+                    <foreignObject width="40" height="40" x="630" y="40" className="pointer-events-none">
+                      <div className="w-full h-full flex items-center justify-center">
+                        <Cpu className="w-5 h-5 text-black" />
+                      </div>
+                    </foreignObject>
                   )},
-                  { cx: 650, cy: 160, nodeKey: 'linkedin', color: '#7bbbff', delay: 0.4, icon: (
-                    <text x="643" y="166" fill="#000" fontWeight="bold" fontSize="14">in</text>
+                  { cx: 650, cy: 160, nodeKey: 'lms_nurture', color: '#7bbbff', delay: 0.4, icon: (
+                    <foreignObject width="40" height="40" x="630" y="140" className="pointer-events-none">
+                      <div className="w-full h-full flex items-center justify-center">
+                        <BookOpen className="w-5 h-5 text-black" />
+                      </div>
+                    </foreignObject>
                   )},
-                  { cx: 650, cy: 260, nodeKey: 'facebook', color: '#ffcc99', delay: 0.55, icon: (
-                    <text x="646" y="268" fill="#000" fontWeight="bold" fontSize="18">f</text>
+                  { cx: 650, cy: 260, nodeKey: 'booked_calls', color: '#ffcc99', delay: 0.55, icon: (
+                    <foreignObject width="40" height="40" x="630" y="240" className="pointer-events-none">
+                      <div className="w-full h-full flex items-center justify-center">
+                        <CheckCircle2 className="w-5 h-5 text-black" />
+                      </div>
+                    </foreignObject>
                   )},
                 ].map(({ cx, cy, nodeKey, color, delay, icon }) => (
                   <g
@@ -871,9 +1021,9 @@ export default function App() {
                 ))}
 
                 {/* Labels */}
-                <text x="150" y="20" textAnchor="middle" fill="#94a3b8" fontFamily="monospace" fontSize="11" fontWeight="bold" letterSpacing="2">SOCIAL FEED</text>
-                <text x="650" y="20" textAnchor="middle" fill="#94a3b8" fontFamily="monospace" fontSize="11" fontWeight="bold" letterSpacing="2">OUTBOUND</text>
-                <text x="400" y="226" textAnchor="middle" fill="#000000" fontFamily="monospace" fontSize="9" fontWeight="bold" letterSpacing="1.5" opacity="0.5">HATCH HUB</text>
+                <text x="150" y="20" textAnchor="middle" fill="#94a3b8" fontFamily="monospace" fontSize="11" fontWeight="bold" letterSpacing="2">ACQUISITION SOURCES</text>
+                <text x="650" y="20" textAnchor="middle" fill="#94a3b8" fontFamily="monospace" fontSize="11" fontWeight="bold" letterSpacing="2">SYSTEM OUTPUTS</text>
+                <text x="400" y="226" textAnchor="middle" fill="#000000" fontFamily="monospace" fontSize="9" fontWeight="bold" letterSpacing="1.5" opacity="0.5">SCALE ENGINE</text>
               </svg>
             </div>
 
@@ -888,7 +1038,7 @@ export default function App() {
                   style={{ backgroundColor: hoveredNode === key ? color : 'transparent' }}
                 >
                   <span className="w-2 h-2 rounded-full border border-black/30" style={{ backgroundColor: color }} />
-                  {name.split(' ')[0]}
+                  {name.split(' (')[0].split(' Calls')[0]}
                 </button>
               ))}
             </div>
@@ -1222,6 +1372,81 @@ export default function App() {
               )}
 
             </div>
+          </div>
+        </section>
+
+        {/* Section: Testimonials (Bubblegum Pink Zine Theme) */}
+        <section id="testimonials" className="scroll-mt-12 max-w-[960px] mx-auto py-6">
+          <div className="bg-[#ffa3d1] border-[3px] border-black rounded-[24px] shadow-[8px_8px_0px_#000] p-8 sm:p-12 relative overflow-hidden select-text min-h-[380px] flex flex-col justify-between">
+            
+            {/* Header: Centered Title */}
+            <div className="text-center mb-6">
+              <h2 className="font-sans font-black text-xl sm:text-2xl text-black uppercase tracking-tight">
+                This is what my clients say
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative z-10 px-4">
+              {/* Left Column: Mascot/Client cutout with wobbly colored backdrop blob */}
+              <div className="md:col-span-5 flex justify-center relative min-h-[190px]">
+                {/* Wobbly backdrop blob shape */}
+                <div 
+                  className="w-44 h-44 border-2 border-black shadow-[4px_4px_0px_#000000] absolute -z-10 animate-blob-wobble"
+                  style={{ backgroundColor: testimonials[activeTestimonial].blobColor }}
+                />
+                
+                {/* High contrast grayscale cutout image with solid white outline border */}
+                <img 
+                  src={testimonials[activeTestimonial].image} 
+                  alt={testimonials[activeTestimonial].author}
+                  className="w-40 h-40 object-cover rounded-[36px] border-2 border-black filter grayscale contrast-[1.15] brightness-[1.05] drop-shadow-[3px_3px_0px_#ffffff] drop-shadow-[-3px_-3px_0px_#ffffff] drop-shadow-[3px_-3px_0px_#ffffff] drop-shadow-[-3px_3px_0px_#ffffff] z-10 transition-all duration-300 transform hover:scale-105"
+                />
+              </div>
+
+              {/* Right Column: Detailed Testimonial Text & Info */}
+              <div className="md:col-span-7 space-y-4 text-center md:text-left flex flex-col justify-center">
+                <p className="font-sans font-extrabold text-sm sm:text-base text-black leading-relaxed italic">
+                  "{testimonials[activeTestimonial].quote}"
+                </p>
+                <div className="pt-2">
+                  <h4 className="font-sans font-black text-base text-black uppercase">
+                    {testimonials[activeTestimonial].author}
+                  </h4>
+                  <p className="text-[10px] font-mono font-black text-black/60 uppercase tracking-wider">
+                    {testimonials[activeTestimonial].role}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Carousel Arrow Controls */}
+            <button 
+              onClick={() => setActiveTestimonial((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1))}
+              className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-9 h-9 bg-white border-2 border-black rounded-full shadow-[2px_2px_0px_#000] hover:bg-zinc-100 active:shadow-none transition-all duration-100 select-none cursor-pointer flex items-center justify-center text-black"
+              aria-label="Previous Testimonial"
+            >
+              <span className="font-sans font-black text-sm sm:text-base">←</span>
+            </button>
+            <button 
+              onClick={() => setActiveTestimonial((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1))}
+              className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 w-9 h-9 bg-white border-2 border-black rounded-full shadow-[2px_2px_0px_#000] hover:bg-zinc-100 active:shadow-none transition-all duration-100 select-none cursor-pointer flex items-center justify-center text-black"
+              aria-label="Next Testimonial"
+            >
+              <span className="font-sans font-black text-sm sm:text-base">→</span>
+            </button>
+
+            {/* Slider Dots Row */}
+            <div className="flex gap-2 justify-center mt-6 z-10">
+              {testimonials.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveTestimonial(idx)}
+                  className={`w-2.5 h-2.5 rounded-full border-2 border-black transition-all ${idx === activeTestimonial ? 'bg-black scale-110' : 'bg-transparent hover:bg-black/20'}`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+
           </div>
         </section>
 

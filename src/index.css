@@ -228,16 +228,58 @@
     font-family: 'Anton', sans-serif;
   }
 
-  @keyframes arrow-bounce {
+  /* Drawing arrow path animation */
+  .drawing-arrow {
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .group:hover .drawing-arrow {
+    opacity: 1;
+    transform: rotate(0deg) scale(1.05);
+  }
+
+  .drawing-arrow .arrow-path-tail {
+    stroke-dasharray: 260;
+    stroke-dashoffset: 260;
+    transition: stroke-dashoffset 0.55s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .drawing-arrow .arrow-path-head {
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    transition: stroke-dashoffset 0.25s cubic-bezier(0.25, 1, 0.5, 1) 0.35s;
+  }
+
+  .group:hover .drawing-arrow .arrow-path-tail {
+    stroke-dashoffset: 0;
+  }
+  .group:hover .drawing-arrow .arrow-path-head {
+    stroke-dashoffset: 0;
+  }
+
+  @keyframes blob-wobble {
     0%, 100% {
-      transform: rotate(12deg) translate(0, 0) scale(1);
+      border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
     }
-    50% {
-      transform: rotate(16deg) translate(-8px, -3px) scale(1.06);
+    33% {
+      border-radius: 70% 30% 52% 48% / 60% 40% 60% 40%;
+    }
+    66% {
+      border-radius: 50% 50% 30% 70% / 40% 60% 30% 70%;
     }
   }
 
-  .animate-arrow-bounce {
-    animation: arrow-bounce 0.7s ease-in-out infinite;
+  .animate-blob-wobble {
+    animation: blob-wobble 8s ease-in-out infinite;
+  }
+
+  @keyframes dash-flow {
+    to {
+      stroke-dashoffset: -40;
+    }
+  }
+
+  .animate-dash-flow {
+    stroke-dasharray: 8 6;
+    animation: dash-flow 0.8s linear infinite;
   }
 }
